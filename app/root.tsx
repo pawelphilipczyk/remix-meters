@@ -1,4 +1,5 @@
 import {
+  Link,
   Links,
   LiveReload,
   Meta,
@@ -7,7 +8,7 @@ import {
   ScrollRestoration,
 } from "remix";
 import type { MetaFunction } from "remix";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, Container, Heading, VStack } from "@chakra-ui/react";
 import theme from "./theme";
 
 export const meta: MetaFunction = () => {
@@ -25,7 +26,14 @@ export default function App() {
       </head>
       <body>
         <ChakraProvider theme={theme}>
-          <Outlet />
+          <Container as={VStack} spacing={6} py={6}>
+            <Link to="/">
+              <Heading p={6} bg="gray.800">
+                Remix Meters
+              </Heading>
+            </Link>
+            <Outlet />
+          </Container>
         </ChakraProvider>
         <ScrollRestoration />
         <Scripts />

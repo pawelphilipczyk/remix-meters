@@ -32,5 +32,16 @@ export default extendTheme({
         color: "gray.200",
       },
     },
+    List: {
+      parts: ["item"],
+      baseStyle: {
+        item: {
+          py: 4,
+          px: 6,
+          borderWidth: 1,
+          borderColor: "gray.800",
+        },
+      },
+    },
   },
 });
