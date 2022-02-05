@@ -26,6 +26,10 @@ export default extendTheme({
         outline: {
           _hover: {
             color: "gray.200",
+            bg: "gray.800",
+          },
+          _active: {
+            bg: "gray.700",
           },
         },
       },
@@ -36,9 +40,30 @@ export default extendTheme({
         maxW: 1280,
       },
     },
+    FormLabel: {
+      baseStyle: {
+        fontSize: "xs",
+        fontWeight: "bold",
+        textTransform: "uppercase",
+        lineHeight: "none",
+      },
+    },
     Heading: {
       baseStyle: {
         color: "gray.200",
+      },
+    },
+    Input: {
+      parts: ["field"],
+      baseStyle: {
+        field: {
+          _hover: {
+            bg: "gray.800",
+          },
+          _focus: {
+            bg: "gray.800",
+          },
+        },
       },
     },
     List: {
