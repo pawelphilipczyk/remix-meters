@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useRef, useState } from "react";
 import { Form, Link, Outlet } from "remix";
+import { MeterCounter } from "~/components";
 
 const defaultValues = {
   digits: 7,
@@ -22,15 +23,8 @@ const types = [
   { name: "Water", type: "water", unit: "m3" },
 ];
 
-const getZeros = (count: number) => Array(count).fill(0).join("");
-
-const getMeterPreview = (digits: number, decimal: number) =>
-  [getZeros(digits - decimal), ".", getZeros(decimal)].join("");
-
 export default function Index() {
-  const [preview, setPreview] = useState(
-    getMeterPreview(defaultValues.digits, defaultValues.decimal)
-  );
+  const [counter, setCounter] = useState(defaultValues);
   const formRef = useRef<HTMLFormElement>(null);
 
   const onChange = () => {
@@ -38,8 +32,7 @@ export default function Index() {
     const data = new FormData(formRef.current);
     const fields = ["digits", "decimal"];
     const [digits, decimal] = fields.map((field) => Number(data.get(field)));
-    const preview = getMeterPreview(digits, decimal);
-    setPreview(preview);
+    setCounter({ digits, decimal: Math.min(digits, decimal) });
   };
 
   return (
@@ -62,7 +55,7 @@ export default function Index() {
               <Input
                 type="number"
                 name="digits"
-                defaultValue={defaultValues.digits}
+                defaultValue={counter.digits}
                 w={16}
                 textAlign="center"
                 max={9}
@@ -74,16 +67,16 @@ export default function Index() {
               <Input
                 type="number"
                 name="decimal"
-                defaultValue={defaultValues.decimal}
+                defaultValue={counter.decimal}
                 w={16}
                 textAlign="center"
-                max={9}
+                max={counter.digits - 1}
                 min={0}
               />
             </FormControl>
           </HStack>
 
-          <Heading size="sm">{preview}</Heading>
+          <MeterCounter {...counter} value={0} />
 
           <Button variant="outline" type="submit" w="full">
             Add
