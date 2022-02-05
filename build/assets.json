@@ -1,18 +1,18 @@
 {
-  "version": "31d07249",
+  "version": "ee008ee0",
   "entry": {
-    "module": "/build/entry.client-MJPELYGT.js",
+    "module": "/build/entry.client-GAB2DBC3.js",
     "imports": [
-      "/build/_shared/chunk-M4PJMJDF.js"
+      "/build/_shared/chunk-2IDHH6FA.js"
     ]
   },
   "routes": {
     "root": {
       "id": "root",
       "path": "",
-      "module": "/build/root-MKJ4BUR2.js",
+      "module": "/build/root-BZG365BH.js",
       "imports": [
-        "/build/_shared/chunk-73G3HPKY.js"
+        "/build/_shared/chunk-FRHIMFQ3.js"
       ],
       "hasAction": false,
       "hasLoader": false,
@@ -23,22 +23,33 @@
       "id": "routes/index",
       "parentId": "root",
       "index": true,
-      "module": "/build/routes/index-MYQSG2BW.js",
+      "module": "/build/routes/index-Y5QLWWTG.js",
       "hasAction": false,
       "hasLoader": false,
       "hasCatchBoundary": false,
       "hasErrorBoundary": false
     },
-    "routes/meters": {
-      "id": "routes/meters",
+    "routes/meters/index": {
+      "id": "routes/meters/index",
       "parentId": "root",
       "path": "meters",
-      "module": "/build/routes/meters-NYQXKIM2.js",
+      "index": true,
+      "module": "/build/routes/meters/index-3XVQ772H.js",
+      "hasAction": false,
+      "hasLoader": false,
+      "hasCatchBoundary": false,
+      "hasErrorBoundary": false
+    },
+    "routes/meters/new": {
+      "id": "routes/meters/new",
+      "parentId": "root",
+      "path": "meters/new",
+      "module": "/build/routes/meters/new-7C2CRT37.js",
       "hasAction": false,
       "hasLoader": false,
       "hasCatchBoundary": false,
       "hasErrorBoundary": false
     }
   },
-  "url": "/build/manifest-31D07249.js"
+  "url": "/build/manifest-EE008EE0.js"
 }

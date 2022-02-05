@@ -7,6 +7,7 @@ import {
   SimpleGrid,
   VStack,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import { Outlet } from "remix";
 
 const meters = [
@@ -43,6 +44,19 @@ export default function Index() {
             </Heading>
           </HStack>
         ))}
+        <HStack as={ListItem}>
+          <Icon type="+" />
+          <Link to="new">
+            <Heading
+              as="h3"
+              size="sm"
+              color="gray.600"
+              _hover={{ color: "gray.900" }}
+            >
+              Add
+            </Heading>
+          </Link>
+        </HStack>
       </SimpleGrid>
       <Outlet />
     </VStack>
