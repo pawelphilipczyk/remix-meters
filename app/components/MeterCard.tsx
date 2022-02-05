@@ -25,7 +25,7 @@ export const MeterCard = ({ meter, value, ...props }: Props) => {
       <Heading as="h3" size="sm">
         {meter.name}
       </Heading>
-      <MeterCounter {...meter} value={value} />
+      <MeterCounter decimal={meter.decimal} digits={meter.digits} value={value} />
     </VStack>
   );
 };
