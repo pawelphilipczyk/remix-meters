@@ -12,7 +12,7 @@ import { ChakraProvider, Container, Heading, VStack } from "@chakra-ui/react";
 import theme from "./theme";
 
 export const meta: MetaFunction = () => {
-  return { title: "New Remix App" };
+  return { title: "Meters" };
 };
 
 export default function App() {
