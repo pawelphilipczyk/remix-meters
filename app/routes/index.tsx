@@ -1,9 +1,11 @@
+import { Container, Heading, List, ListItem, VStack } from "@chakra-ui/react";
+
 export default function Index() {
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
-      <h1>Welcome to Remix</h1>
-      <ul>
-        <li>
+    <Container as={VStack} spacing={6} py={6}>
+      <Heading p={6} bg="gray.800">Remix Meters</Heading>
+      <List as={VStack} spacing={6}>
+        <ListItem p={6} borderWidth={1} borderColor="gray.800">
           <a
             target="_blank"
             href="https://remix.run/tutorials/blog"
@@ -11,8 +13,8 @@ export default function Index() {
           >
             15m Quickstart Blog Tutorial
           </a>
-        </li>
-        <li>
+        </ListItem>
+        <ListItem p={6} borderWidth={1} borderColor="gray.800">
           <a
             target="_blank"
             href="https://remix.run/tutorials/jokes"
@@ -20,13 +22,13 @@ export default function Index() {
           >
             Deep Dive Jokes App Tutorial
           </a>
-        </li>
-        <li>
+        </ListItem>
+        <ListItem p={6} borderWidth={1} borderColor="gray.800">
           <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
             Remix Docs
           </a>
-        </li>
-      </ul>
-    </div>
+        </ListItem>
+      </List>
+    </Container>
   );
 }
