@@ -21,6 +21,15 @@ export default extendTheme({
     },
   },
   components: {
+    Button: {
+      variants: {
+        outline: {
+          _hover: {
+            color: "gray.200",
+          },
+        },
+      },
+    },
     Container: {
       baseStyle: {
         px: [4, 4, 12],
@@ -40,6 +49,9 @@ export default extendTheme({
           px: 6,
           borderWidth: 1,
           borderColor: "gray.800",
+          _hover: {
+            bg: "gray.800",
+          },
         },
       },
     },

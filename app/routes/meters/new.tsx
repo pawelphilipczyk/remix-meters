@@ -1,5 +1,5 @@
 import { Button, Heading, Select, VStack } from "@chakra-ui/react";
-import { Form, Outlet } from "remix";
+import { Form, Link, Outlet } from "remix";
 
 const types = [
   { name: "Electricity", type: "electricity", unit: "kWh" },
@@ -21,6 +21,7 @@ export default function Index() {
           <Button variant="outline" type="submit">
             Add
           </Button>
+          <Link to="/meters">Cancel</Link>
         </VStack>
       </Form>
       <Outlet />

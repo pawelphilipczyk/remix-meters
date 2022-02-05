@@ -8,13 +8,20 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { Outlet } from "remix";
+import { Outlet, useLoaderData } from "remix";
 
-const meters = [
-  { name: "Electricity", type: "electricity", unit: "kWh" },
-  { name: "Gas", type: "gas", unit: "m3" },
-  { name: "Water", type: "water", unit: "m3" },
-];
+import type { LoaderFunction } from "remix";
+import type { Meter } from "@prisma/client";
+import { db } from "~/utils/db.server";
+
+type LoaderData = { meters: Array<Meter> };
+
+export let loader: LoaderFunction = async () => {
+  const data: LoaderData = {
+    meters: await db.meter.findMany(),
+  };
+  return data;
+};
 
 const Icon = (props: HeadingProps & { type: string }) => (
   <Heading
@@ -24,7 +31,7 @@ const Icon = (props: HeadingProps & { type: string }) => (
     p={2}
     lineHeight="none"
     textTransform="uppercase"
-    size="sm"
+    size="xl"
     {...props}
   >
     {props.type?.slice(0, 1)}
@@ -32,32 +39,30 @@ const Icon = (props: HeadingProps & { type: string }) => (
 );
 
 export default function Index() {
+  const data = useLoaderData<LoaderData>();
+
   return (
     <VStack spacing={6} py={6}>
       <Heading size="md">Your meters</Heading>
       <SimpleGrid as={List} gap={6} columns={[1, 2, 3, 4]}>
-        {meters.map((meter) => (
-          <HStack as={ListItem}>
-            <Icon type={meter.type} />
-            <Heading as="h3" size="sm">
-              {meter.name}
-            </Heading>
-          </HStack>
+        {data.meters.map((meter) => (
+          <ListItem key={meter.id}>
+            <VStack as={Link} to={`/meters/${meter.id}`}>
+              <Icon type={meter.type} />
+              <Heading as="h3" size="sm">
+                {meter.name}
+              </Heading>
+              <Heading as="h4" size="xs" color="gray.300">{meter.value}</Heading>
+            </VStack>
+          </ListItem>
         ))}
-        <HStack as={ListItem}>
-          <Icon type="+" />
-          <Link to="new">
-            <Heading
-              as="h3"
-              size="sm"
-              color="gray.600"
-              _hover={{ color: "gray.900" }}
-            >
-              Add
-            </Heading>
-          </Link>
-        </HStack>
       </SimpleGrid>
+      <HStack as={Link} to="new">
+        <Icon type="+" />
+        <Heading as="h3" size="sm">
+          Add
+        </Heading>
+      </HStack>
       <Outlet />
     </VStack>
   );
