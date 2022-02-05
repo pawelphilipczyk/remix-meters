@@ -35,7 +35,7 @@ export const MeterForm = () => {
   };
 
   return (
-    <Form onChange={onChange} ref={formRef}>
+    <Form onChange={onChange} ref={formRef} className="meter-form">
       <VStack spacing={6}>
         <FormControl id="meter-name">
           <FormLabel>Name</FormLabel>
