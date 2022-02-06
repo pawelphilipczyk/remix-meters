@@ -1,7 +1,23 @@
-import { Container, Heading, List, ListItem, VStack } from "@chakra-ui/react";
-import { Link } from "remix";
+import { Button, List, ListItem, VStack } from "@chakra-ui/react";
+import { Form, json, Link, LoaderFunction, useLoaderData } from "remix";
+import { auth, sessionStorage } from "~/auth.server";
+
+type LoaderData = {
+  error: { message: string } | null;
+};
+
+export const loader: LoaderFunction = async ({ request }) => {
+  await auth.isAuthenticated(request, { successRedirect: "/meters" });
+  const session = await sessionStorage.getSession(
+    request.headers.get("Cookie")
+  );
+  const error = session.get(auth.sessionErrorKey) as LoaderData["error"];
+  return json<LoaderData>({ error });
+};
 
 export default function Index() {
+  const { error } = useLoaderData<LoaderData>();
+
   return (
     <List as={VStack} spacing={6}>
       <ListItem>
@@ -19,9 +35,10 @@ export default function Index() {
         </Link>
       </ListItem>
       <ListItem>
-        <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-          Remix Docs
-        </a>
+        <Form method="post" action="/auth/github">
+          {error && <div>{error.message}</div>}
+          <Button variant="line" type="submit">Sign In with GitHub</Button>
+        </Form>
       </ListItem>
     </List>
   );
