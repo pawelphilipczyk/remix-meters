@@ -1,7 +1,10 @@
-import { Container, Heading, List, ListItem, VStack } from "@chakra-ui/react";
+import { Button, List, ListItem, VStack } from "@chakra-ui/react";
 import { Link } from "remix";
+import { useMagic } from "~/lib/magic";
 
 export default function Index() {
+  const magic = useMagic();
+  
   return (
     <List as={VStack} spacing={6}>
       <ListItem>
@@ -19,9 +22,9 @@ export default function Index() {
         </Link>
       </ListItem>
       <ListItem>
-        <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-          Remix Docs
-        </a>
+        <Button variant="link" onClick={() => alert("Sign in")}>
+          Sign in
+        </Button>
       </ListItem>
     </List>
   );

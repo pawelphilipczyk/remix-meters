@@ -10,6 +10,7 @@ import {
 import type { MetaFunction } from "remix";
 import { ChakraProvider, Container, Heading, VStack } from "@chakra-ui/react";
 import theme from "./theme";
+import { MagicProvider } from "~/lib/magic";
 
 export const meta: MetaFunction = () => {
   return { title: "Meters" };
@@ -25,16 +26,18 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <ChakraProvider theme={theme}>
-          <Container as={VStack} spacing={6} py={6}>
-            <Link to="/">
-              <Heading p={6} bg="gray.800">
-                Remix Meters
-              </Heading>
-            </Link>
-            <Outlet />
-          </Container>
-        </ChakraProvider>
+        <MagicProvider>
+          <ChakraProvider theme={theme}>
+            <Container as={VStack} spacing={6} py={6}>
+              <Link to="/">
+                <Heading p={6} bg="gray.800">
+                  Remix Meters
+                </Heading>
+              </Link>
+              <Outlet />
+            </Container>
+          </ChakraProvider>
+        </MagicProvider>
         <ScrollRestoration />
         <Scripts />
         {process.env.NODE_ENV === "development" && <LiveReload />}
